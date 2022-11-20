@@ -26,8 +26,9 @@ repeat{
 //Zadanie 2
 print("\nZadanie 2 ")
 print("Wprowadż liczbę: ")
-var licz2 = readLine()!
-
+guard let licz2 = Int(readLine()!) else {
+    fatalError("Nie liczba")
+}
 func czyPierwsza(_ n: Int) -> Bool {
     guard n >= 2     else { return false }
     guard n != 2     else { return true  }
@@ -37,21 +38,69 @@ func czyPierwsza(_ n: Int) -> Bool {
 
 print(czyPierwsza(Int(licz2)!))
 
+/*Zadanie 3*/
+print("Podaj liczbę minimum trzycyfrową")
+var liczba = readLine()!
 
-//Zadanie 3
+var temp : Int?
+temp = Int(liczba)
 
-print("\nZadanie 3 ")
-print("Wprowadż liczbę trzycyfrową: ")
-var licz3 = readLine()!
-var l3 = Int(licz3)!
-if (l3 < 100 && l3 > -100){
-    print("NO I CO? POWIEDZIAŁEM, ŻE TRYCYFROWĄ!")
+while (temp == nil || liczba.count < 3) {
+    print("Nie podano liczby lub podano napis nie będący liczbą! Podaj ponwnie")
+    liczba = readLine()!
+    temp = Int(liczba)
 }
-else{
-    for c in licz3{
-        print(Int(String(c))!)
-        print("Rozmiar: \(c.licz3)")
-        var wynik = 0
-        print("Wynik: \(wynik)")
+
+var iloczyn = 1.0;
+var count = 0.0;
+for char in liczba {
+    iloczyn = iloczyn * Double(String(char))!
+    count = count + 1;
+}
+
+let srednia_geo = pow((iloczyn), (1.0/count))
+//print("Srenia geometryczna:",srednia_geo)
+
+/*Zadanie 4*/
+print("Podaj napis")
+var napis = readLine()!
+var czyPalindrom = true;
+let char = Array(napis)
+for i in 0..<char.count / 2 {
+    if char[i] != char[char.count - 1 - i] {
+        czyPalindrom = false
     }
 }
+
+if (czyPalindrom) {
+    print("Palindrom")
+} else {
+    print("Nie palindrom")
+}
+
+/*Zadanie 5*/
+var a1, a2, a3 : Int
+var max = 0
+var min = 0
+var licz : String = ""
+print("Podaj trzy pierwsze wyrazy ciągu")
+a1 = Int(readLine()!)!
+a2 = Int(readLine()!)!
+a3 = Int(readLine()!)!
+repeat {
+    if ((a2 > a1) && (a2 > a3)) {
+        max = max + 1
+    }
+    if ((a2 < a1) && (a2 < a3)) {
+        min = min + 1
+    }
+    a1 = a2
+    a2 = a3
+    licz = readLine()!
+    if let temp = Int(licz) {
+        a3 = temp
+    }
+}
+while (licz != "k")
+
+print("Max : \(max), Min: \(min)")
