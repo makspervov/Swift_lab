@@ -8,7 +8,7 @@
 import Foundation
 
 //Zadanie 1
-/*
+
 print("Wpisz rok")
 var rok = Int(readLine()!)!
 
@@ -36,9 +36,9 @@ else
 {
     print("Wiek: ", rok / 100 + 1)
 }
-*/
+
 //Zadanie 3
-/*
+
 print("Wpisz średnią ze studiów (zakres 2 - 5):")
 let sr = Float(readLine()!)
 switch (sr!)
@@ -50,9 +50,9 @@ case 2..<3: print("Stypendium: 0")
 default:
     print("Liczba spoza zakresu")
 }
-*/
+
 //Zadanie 4
-/*
+
 print("Liczba a: ")
 let a = Float(readLine()!)!
 
@@ -84,9 +84,9 @@ case 4:
     print(result)
 default: print("Błąd wczytywania")
 }
-*/
+
 //Zadanie 5
-/*
+
 print("Podaj kod pocztowy")
 let kod = readLine()
 switch (kod!){
@@ -103,19 +103,35 @@ case let x where x.hasPrefix("24"):
 default:
     print("Podałeś błędny kod")
 }
-*/
+
 //Zadanie 6
 
 var znak = readLine()!
 
 switch (znak)
 {
-case "a", "ą", "e", "ę", "i", "o", "u", "y":
-    print("samogłoska")
-case "b", "c", "ć", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "r", "s", "t", "w", "z", "ż", "ź":
-    print("spółgłoska")
-case "0","1","2","3","4","5","6","7","8","9":
-    print("cyfra")
+case "a", "A", "o", "O", "u", "U", "e", "E", "y", "Y", "i", "I":
+    print("Wczytano samogłoską")
+case "b"..."d","B"..."D", "f"..."h", "F"..."H",  "j"..."n", "J"..."N", "p"..."t", "P"..."T", "v"..."x", "V"..."X", "z", "Z": 
+    print("Wczytano spółgłoską")
+case "0"..."9": 
+    print("Wczytano cyfrę")
 default:
     print("inny znak")
+}
+
+//Zadanie 7
+print("Podaj pesel: ")
+let pesel = readLine()!
+let range = NSRange(location: 0, length: pesel.utf16.count)
+let regex = try! NSRegularExpression(pattern: "[0-9]{11}")
+if regex.firstMatch(in: pesel, options: [], range: range) != nil {
+    print("Pesel jest poprawny")
+    let znak = Int(String(pesel[pesel.index(pesel.endIndex, offsetBy: -2)]))!
+    switch(znak % 2 ){
+    case 0: print("Podałeś pesel kobiety")
+    default: print("Podałęs pesel mężczyzny")
+    }
+} else{
+    print("Pesel nie jest poprawny")
 }
