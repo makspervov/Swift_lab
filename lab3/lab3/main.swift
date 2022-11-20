@@ -33,37 +33,106 @@ var tekst = """
 """
 print(tekst)
 
-print("\n\nZadanie 3 (w domu to zrób)")
-/*
-print("Please enter your first name")
-var name = readLine()!
+print("\n\nZadanie 3")
 
-print("Please enter your last name")
-var surname = readLine()!
+print("Podaj imie")
+let imie = readLine()!
 
-print("Please enter your patronymic")
-var patronymic = readLine()!
+print("Podaj drugie imie")
+let drugieImie = readLine()!
 
-print("Please enter your year of birth")
-var year_of_birth = readLine()!
+print("Podaj nazwisko")
+let nazwisko = readLine()!
 
-var text = surname + name + patronymic + year_of_birth
-print(text)
+print("Podaj rok urodzenia")
+let rokUrodzenia = readLine()!
 
-//usuwamy imię ojca
-let range_patronymic = text.index(text.startIndex, offsetBy: 41) ..< text.index(text.startIndex, offsetBy: 63)
-text.removeSubrange(range_patronymic)
+//Zamiast operatora + może być metoda append imie.append(drugieImie).append(...)
+var wynik1 = imie + drugieImie + nazwisko + rokUrodzenia
+print(wynik1)
 
-print("\n\tPATRONYMIC IS DELETED")
-print(text)
+let range = wynik1.index(wynik1.startIndex, offsetBy: imie.count) ..< wynik1.index(wynik1.startIndex,offsetBy: imie.count+drugieImie.count)
 
-//usuwamy rok urodzenia i wpisujemy wiek
-let range_year_of_birth = text.index(text.startIndex, offsetBy: 64) ..< text.index(before: <#T##String.Index#>)
-text.removeSubrange(range_year_of_birth)
+wynik1.removeSubrange(range)
+print(wynik1)
 
-let Years = Int(year_of_birth)!
-text.append("Year: \(2022 - Years)")
-print("\n\tYEAR OF BIRTH IS EDITED")
-print(text)
-*/
+let range2 = wynik1.index(wynik1.startIndex, offsetBy: imie.count+nazwisko.count) ..< wynik1.endIndex
 
+wynik1.removeSubrange(range2)
+let wiek = 2022 - Int(rokUrodzenia)!
+wynik1.insert(contentsOf: String(wiek), at: wynik1.endIndex)
+print(wynik1)
+
+if wynik1.hasPrefix("D") {
+    print("Zaczyna się od D")
+} else {
+    print("Nie zaczyna się od D")
+}
+
+
+
+//Zadanie 4
+print("Podaj ciąg")
+var ciag = readLine()!
+print("Podaj znak")
+var znak = readLine()!
+print("Podaj odległość")
+var odl = Int(readLine()!)!
+
+if ciag.hasPrefix(znak) {
+    print("Na początku")
+}
+
+if ciag.hasSuffix(znak){
+    print("Na końcu")
+}
+
+var s = ciag[ciag.index(ciag.startIndex, offsetBy: odl)]
+if znak == String(s) {
+    print("Oddalony o",odl,"od początku")
+}
+
+s = ciag[ciag.index(ciag.endIndex, offsetBy: -odl)]
+if znak == String(s) {
+    print("Oddalony o",odl,"od końca")
+}
+
+//Zadanie 5
+print("Podaj pierwszy ciag")
+let c1 = readLine()!
+print("Podaj drugi ciag")
+let c2 = readLine()!
+
+if c1 == c2 {
+    print("Ciagi identyczne")
+}
+print("Podaj perfix")
+let pref = readLine()!
+
+if c1.hasPrefix(pref) {
+    print("Pierwszy ciag ma prefix")
+}
+
+if c2.hasPrefix(pref) {
+    print("Drugi ciag ma prefix")
+}
+
+print("Podaj suffix")
+let suf = readLine()!
+
+if c1.hasSuffix(suf) {
+    print("Pierwszy ciag ma suffix")
+}
+
+if c2.hasSuffix(suf) {
+    print("Drugi ciag ma suffix")
+}
+
+
+//Zadanie 6
+let kursDolara = 3.9
+
+print("Podaj kwotę w złotówkach")
+let kwota = Double(readLine()!)!
+
+print(kwota,"zł =",String(format: "%.2f", kwota/kursDolara))
