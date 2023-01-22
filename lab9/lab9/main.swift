@@ -229,3 +229,45 @@ else{
     print("Nie ma takiego studenta")
 }
 print(student)
+
+print("Zadanie 5")
+
+struct loty {
+    var wylot: [String: String]
+    var przylot: [String: String]
+    var czas: Int
+}
+
+var daneLotow : [loty] = []
+print("Podaj liczbe lotów")
+var licz = Int(readLine()!)!
+var l = loty(wylot: [String:String](), przylot: [String:String](), czas: 0)
+var tmp = ""
+for i in 0..<licz {
+    print("Podaj id \(i+1) lotniska wylotu")
+    tmp = readLine()!
+    l.wylot[tmp] = ""
+    print("Podaj nazwę \(i+1) lotniska wylotu")
+    l.wylot[tmp] = readLine()!
+    print("Podaj id \(i+1) lotniska przylotu")
+    tmp = readLine()!
+    l.przylot[tmp] = ""
+    print("Podaj nazwę \(i+1) lotniska przylotu")
+    l.przylot[tmp] = readLine()!
+    print("Podaj czas lotu pomiedzy lotniskami")
+    l.czas = Int(readLine()!)!
+    daneLotow.append(l)
+    l = loty(wylot: [String:String](), przylot: [String:String](), czas: 0)
+}
+print(daneLotow)
+var sr = 0.0
+for i in daneLotow {
+    sr = sr + Double(i.czas)
+}
+sr = sr/3.0
+print("Loty które trwaja dłużej niż średnia \(sr)")
+for i in daneLotow {
+    if Double(i.czas) > sr {
+        print(i)
+    }
+}
