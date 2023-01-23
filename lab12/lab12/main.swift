@@ -157,7 +157,7 @@ import Foundation
  oraz wyświetli informacje o poprawnie wykonanej operacji lub o błędzie, który wystąpił.
  Kwota w bankomacie oraz nominały można zdefiniować w programie jako stałe.
  */
-
+/*
 enum ATMErrors: Error{
     case NiewystarczajaceSrodki
     case BrakKwoty
@@ -224,3 +224,113 @@ catch ATMErrors.BlednaKwota{
 catch ATMErrors.Inne{
     print("Bankomat nie działa")
 }
+*/
+
+
+//Kolos Tenisista
+class Osoba{
+    var imie: String
+    var nazwisko: String
+    var waga: Double
+    var wzrost: Int
+    var PESEL: String
+    var obywatelstwo: Obywatelstwo
+    
+    enum Obywatelstwo{
+        case Hiszpanskie
+        case Niemieckie
+        case Polskie
+    }
+    
+    init(imie: String, nazwisko: String, waga: Double, wzrost: Int, PESEL: String, obywatelstwo: Obywatelstwo) {
+        self.imie = imie
+        self.nazwisko = nazwisko
+        self.waga = waga
+        self.wzrost = wzrost
+        self.PESEL = PESEL
+        self.obywatelstwo = obywatelstwo
+    }
+    
+    func info() {
+        print("Imie i nazwisko: \(imie) \(nazwisko)")
+        print("Waga: \(waga)")
+        print("Wzrost: \(wzrost)")
+        print("PESEL: \(PESEL)")
+        print("Obywatelstwo: \(obywatelstwo)")
+    }
+}
+
+class Tenisista:Osoba{
+    var rodzajGry: RodzajGry
+    var najwyzszaPozycja: Int
+    var liczbaPunktow: String
+    var pozycja: Int
+    var ostatnieTurnieje: [String]
+
+    enum RodzajGry {
+        case single
+        case double
+        case singleAndDouble
+    }
+    
+    init(imie: String, nazwisko: String, waga: Double, wzrost: Int, PESEL: String,
+    obywatelstwo: Obywatelstwo, rodzajGry: RodzajGry, najwyzszaPozycja: Int, liczbaPunktow: Int, pozycja: Int, 
+    ostatnieTurnieje: [String]){
+        self.rodzajGry = rodzajGry
+        self.najwyzszaPozycja = najwyzszaPozycja
+        self.liczbaPunktow = liczbaPunktow
+        self.pozycja = pozycja
+        self.ostatnieTurnieje = ostatnieTurnieje
+        super.init(imie: imie, nazwisko: nazwisko, waga: waga, wzrost: wzrost, PESEL: PESEL, obywatelstwo: obywatelstwo)
+    }
+    
+    override func info(){
+        super.info()
+        print("Rodzaj gry: \(rodzajGry)")
+        print("Najwyzsza pozycja: \(najwyzszaPozycja)")
+        print("Liczba punktow: \(liczbaPunktow)")
+        print("Pozycja: \(pozycja)")
+        print("Ostatnie turnieje: \(ostatnieTurnieje)")
+    }
+    
+    func dodajTurniej(nazwa: String, punkty: Int) {
+        ostatnieTurnieje.append(nazwa)
+        liczbaPunktow += punkty
+    }
+}
+
+// let formatter = DateFormatter()
+// formatter.dateFormat = "yyyy/MM/dd"
+// let date = formatter.date(from: "2021/12/20")
+// var i = date!.distance(to: date!)
+
+let gracz1 = Tenisista(imie: "Roger", nazwisko: "Federer", waga: 85, wzrost: 185, PESEL: "0202020202", obywatelstwo: .Niemieckie, RodzajGry: .singleAndDouble, najwyzszaPozycja: 1, liczbaPunktow: 10000, pozycja: 2, ostatnieTurnieje: ["Wimbledon", "Australian Open"])
+let gracz2 = Tenisista(imie: "Rafael", nazwisko: "Nadal", waga: 80, wzrost: 185, PESEL: "0303030303", obywatelstwo: .Hiszpanskie, RodzajGry: .single, najwyzszaPozycja: 2, liczbaPunktow: 9000, pozycja: 3, ostatnieTurnieje: ["French Open", "US Open"])
+let gracz3 = Tenisista(imie: "Novak", nazwisko: "Djokovic", waga: 78, wzrost: 185, PESEL: "0404040404", obywatelstwo: .Polskie, RodzajGry: .singleAndDouble, najwyzszaPozycja: 3, liczbaPunktow: 8000, pozycja: 1, ostatnieTurnieje: ["Australian Open", "US Open"])
+let gracz4 = Tenisista(imie: "Pablo", nazwisko: "Carreno", waga: 85, wzrost: 185, PESEL: "0505050505", obywatelstwo: .Hiszpanskie, RodzajGry: .double, najwyzszaPozycja: 4, liczbaPunktow: 7000, pozycja: 4, ostatnieTurnieje: ["French Open", "Wimbledon"])
+let gracz5 = Tenisista(imie: "David", nazwisko: "Ferrer", waga: 75, wzrost: 185, PESEL: "0606060606", obywatelstwo: .Hiszpanskie, RodzajGry: .singleAndDouble, najwyzszaPozycja: 5, liczbaPunktow: 6000, pozycja: 5, ostatnieTurnieje: ["US Open", "Australian Open"])
+
+var gracze = [Tenisista]()
+gracze.append(gracz1)
+gracze.append(gracz2)
+gracze.append(gracz3)
+gracze.append(gracz4)
+gracze.append(gracz5)
+
+var HiszpanskieGracze: [Tenisista] = []
+for gracz in gracze {
+    if gracz.obywatelstwo == .Hiszpanskie && gracz.rodzajGry == .double {
+        HiszpanskieGracze.append(gracz)
+    }
+}
+
+if HiszpanskieGracze.count > 0 {
+    for gracz in HiszpanskieGracze {
+        gracz.info()
+    }
+} else {
+    print("There are no Spanish doubles players in the array.")
+}
+
+
+
